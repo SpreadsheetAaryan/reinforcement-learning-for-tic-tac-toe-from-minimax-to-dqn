@@ -80,8 +80,25 @@ def get_legal_moves(board):
                 ret.append((i, j))
     return ret
 
-# Step 7 - check_row_win (not yet solved)
-# TODO: implement
+# Step 7 - check_row_win
+import numpy as np
+
+def check_row_win(board, player):
+    """Return True if `player` has three-in-a-row across any row of `board`."""
+    # TODO: detect whether the given player has three identical marks across any row
+    
+    for i in range(len(board)):
+        cnt = 0
+        for j in range(len(board[i])):
+            if board[i][j] != player:
+                break
+            else:
+                cnt += 1
+        
+        if cnt == 3:
+            return True
+    
+    return False
 
 # Step 8 - check_column_win (not yet solved)
 # TODO: implement
