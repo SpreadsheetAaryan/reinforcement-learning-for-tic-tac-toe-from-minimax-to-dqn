@@ -168,8 +168,26 @@ def get_game_status(board):
     else:
         return 'ongoing'
 
-# Step 14 - get_current_player (not yet solved)
-# TODO: implement
+# Step 14 - get_current_player
+import numpy as np
+
+def get_current_player(board):
+    """Return 1 if X is to move, -1 if O is to move."""
+    # TODO: infer whose turn it is from the counts of X and O marks on the board
+    cnt_x = 0
+    cnt_o = 0
+
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if board[i][j] == 1:
+                cnt_x += 1
+            elif board[i][j] == -1:
+                cnt_o += 1
+    
+    if cnt_o >= cnt_x:
+        return 1
+    else:
+        return -1
 
 # Step 15 - switch_player (not yet solved)
 # TODO: implement
