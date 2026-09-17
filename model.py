@@ -213,8 +213,32 @@ def play_hardcoded_game(moves):
     
     return board, get_game_status(board)
 
-# Step 17 - play_interactive_game (not yet solved)
-# TODO: implement
+# Step 17 - play_interactive_game
+def play_interactive_game():
+    """Play a full game with two humans entering moves via stdin and return the final status."""
+    # TODO: loop printing the board, reading 'row col' from stdin, applying moves until terminal
+    cur = 1
+    board = create_empty_board()
+
+    while True:
+        print_board(board)
+        user_input = input().strip()
+        parts = user_input.split()
+        if len(parts) != 2 or not all(p.isdigit() for p in parts):
+            print("Invalid input format. Please enter two numbers separated by a space (e.g., 0 2).")
+            continue
+            
+        row, col = int(parts[0]), int(parts[1])
+
+        try:
+            board = place_move(board, row, col, cur)
+        except ValueError:
+            continue
+
+        if get_game_status(board) != 'ongoing':
+            print_board(board)
+            return get_game_status(board)
+        cur = switch_player(cur)
 
 # Step 18 - TicTacToeGame (not yet solved)
 # TODO: implement
