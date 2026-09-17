@@ -26,8 +26,24 @@ def encode_player(player):
 
     return mapping[player]
 
-# Step 3 - print_board (not yet solved)
-# TODO: implement
+# Step 3 - print_board
+import numpy as np
+
+def print_board(board):
+    """Print the 3x3 board using X, O, and . characters."""
+    # TODO: render each cell as 'X' (1), 'O' (-1), or '.' (0) in a 3x3 grid
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if board[i][j] == 1:
+                print('X', end="")
+            elif board[i][j] == -1:
+                print('O', end="")
+            else:
+                print('.', end="")
+            
+            if j != len(board[i]) - 1:
+                print(' ', end="")
+        print()
 
 # Step 4 - is_cell_empty (not yet solved)
 # TODO: implement
