@@ -127,8 +127,12 @@ def check_main_diagonal_win(board, player):
     # TODO: check whether the main diagonal of `board` is fully occupied by `player`...
     return board[0][0] == player and board[1][1] == player and board[2][2] == player
 
-# Step 10 - check_anti_diagonal_win (not yet solved)
-# TODO: implement
+# Step 10 - check_anti_diagonal_win
+import numpy as np
+
+def check_anti_diagonal_win(board, player):
+    # TODO: return True if `player` occupies all three anti-diagonal cells of the 3x3 board.
+    return board[0][2] == player and board[1][1] == player and board[2][0] == player
 
 # Step 11 - is_winner (not yet solved)
 # TODO: implement
