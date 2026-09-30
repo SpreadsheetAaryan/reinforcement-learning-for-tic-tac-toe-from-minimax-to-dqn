@@ -389,8 +389,32 @@ def minimax_recursive(board, player):
     else:
         return min_val
 
-# Step 26 - minimax_max_min_step (not yet solved)
-# TODO: implement
+# Step 26 - minimax_max_min_step
+import numpy as np
+
+def minimax_max_min_step(board, player):
+    """Return (best_score, best_move) after expanding one minimax level."""
+    # TODO: iterate legal moves, recurse, pick max if player == 1 else min...
+    moves = get_legal_moves(board)
+    max_score = -2
+    max_move = (0, 0)
+    min_move = (0, 0)
+    min_score = 2
+    for row, col in moves:
+        tmp = board
+        new_board = place_move(tmp, row, col, player)
+        score = minimax_recursive(new_board, switch_player(player))
+        if score > max_score:
+            max_score = score
+            max_move = (row, col)
+        if score < min_score:
+            min_score = score
+            min_move = (row, col)
+    
+    if player == 1:
+        return max_score, max_move
+    else:
+        return min_score, min_move
 
 # Step 27 - minimax_best_move (not yet solved)
 # TODO: implement
