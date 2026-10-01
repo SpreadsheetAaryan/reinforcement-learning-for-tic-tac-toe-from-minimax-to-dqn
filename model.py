@@ -471,11 +471,53 @@ def minimax_alpha_beta(board, player, alpha, beta):
 
     return best_score, best_move
 
-# Step 29 - play_minimax_vs_random_matches (not yet solved)
-# TODO: implement
+# Step 29 - play_minimax_vs_random_matches
+def play_minimax_vs_random_matches(n_games, minimax_plays_x, rng):
+    # TODO: run n_games of minimax vs random and return aggregated outcome rates.
+    outcomes = []
+    for i in range(n_games):
+        player = 1
+        board = create_empty_board()
+        while get_game_status(board) == 'ongoing':
+            row, col = 0,0
+            if player == 1:
+                if minimax_plays_x:
+                    row, col = minimax_best_move(board, player)
+                else:
+                    row, col = random_move_agent(board, player, rng)
+            else:
+                if minimax_plays_x:
+                    row, col = random_move_agent(board, player, rng)
+                else:
+                    row, col = minimax_best_move(board, player)
+            
+            board = place_move(board, row, col, player)
+            player = switch_player(player)
+        outcomes.append(get_game_status(board))
+    
+    return compute_outcome_rates(outcomes)
 
-# Step 30 - play_minimax_vs_minimax_matches (not yet solved)
-# TODO: implement
+# Step 30 - play_minimax_vs_minimax_matches
+def play_minimax_vs_minimax_matches(n_games):
+    """Play n_games minimax-vs-minimax games and report outcome rates plus an all_draws flag."""
+    # TODO: simulate n_games minimax-vs-minimax games and aggregate outcome rates.
+    outcomes = []
+    flag = True
+    for i in range(n_games):
+        player = 1
+        board = create_empty_board()
+        while get_game_status(board) == 'ongoing':
+            score, move = minimax_alpha_beta(board, player, float('-inf'), float('inf'))
+            row, col = move
+            board = place_move(board, row, col, player)
+            player = switch_player(player)
+        outcomes.append(get_game_status(board))
+        if get_game_status(board) != 'draw':
+            flag = False
+    
+    rates = compute_outcome_rates(outcomes)
+    rates['all_draws'] = flag
+    return rates
 
 # Step 31 - encode_board_state_key (not yet solved)
 # TODO: implement
